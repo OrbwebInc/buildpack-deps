@@ -1,4 +1,4 @@
-FROM    buildpack-deps:stretch
+FROM    orbweb/buildpack-deps:stretch
 
 RUN     apt-get update && mkdir -p /opt/src
 RUN     apt-get install -y libc6-dev-i386 libacl1-dev
