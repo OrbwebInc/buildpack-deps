@@ -1,7 +1,11 @@
 FROM    buildpack-deps:xenial-curl
 
 RUN     apt-get update && mkdir -p /opt/src
-RUN     apt-get install -y libc6-dev-i386
+RUN     apt-get install -y libc6-dev-i386 libacl1-dev
+
+RUN     apt-get update && \
+        apt-get install -y --no-install-recommends ca-certificates curl wget bzr git mercurial openssh-client subversion autoconf automake bzip2 file g++ gcc imagemagick libbz2-dev libc6-dev libcurl4-openssl-dev libevent-dev libffi-dev libglib2.0-dev libjpeg-dev liblzma-dev libmagickcore-dev libmagickwand-dev libmysqlclient-dev libncurses-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libtool libxml2-dev libxslt-dev libyaml-dev make tar patch xz-utils zlibc zlib1g-dev && \
+        rm -rf /var/lib/apt/lists/*
 
 
 RUN     curl https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz | tar xvz && \
@@ -14,7 +18,6 @@ RUN     apt-get purge -y python.*
 ENV     LANG=C.UTF-8
 ENV     PYTHON_VERSION=2.7.11
 ENV     PYTHON_PIP_VERSION=8.1
-RUN     apt-get install -y xz-utils tar make zlibc zlib1g-dev openssl libssl-dev
 RUN     set -x && \
         mkdir -p /usr/src/python && \
         wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz -O python.tar.xz && \
@@ -33,7 +36,7 @@ RUN     set -x && \
 RUN     pip install numpy==1.10.2
 
 
-RUN     apt-get install build-essential -y
+RUN     apt-get update && apt-get install build-essential -y
 RUN     mkdir -p /opt/src/opencv && \
         cd /opt/src/opencv && \
         curl -fSL https://github.com/Itseez/opencv/archive/2.4.12.3.tar.gz | tar xvz --strip-components=1 && \
