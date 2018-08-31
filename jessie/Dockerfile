@@ -1,10 +1,10 @@
-FROM    orbweb/buildpack-deps:stretch
+FROM    orbweb/buildpack-deps:jessie
 
 RUN     apt-get update && mkdir -p /opt/src
 RUN     apt-get install -y libc6-dev-i386 libacl1-dev
 
 RUN     apt-get update && \
-        apt-get install -y --no-install-recommends ca-certificates curl wget bzr git mercurial openssh-client subversion autoconf automake bzip2 file g++ gcc imagemagick libbz2-dev libc6-dev libcurl4-openssl-dev libevent-dev libffi-dev libglib2.0-dev libjpeg-dev liblzma-dev libmagickcore-dev libmagickwand-dev default-libmysqlclient-dev libncurses-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libtool libxml2-dev libxslt-dev libyaml-dev make tar patch xz-utils zlibc zlib1g-dev && \
+        apt-get install -y --no-install-recommends ca-certificates curl wget bzr git mercurial openssh-client subversion autoconf automake bzip2 file g++ gcc imagemagick libbz2-dev libc6-dev libcurl4-openssl-dev libevent-dev libffi-dev libglib2.0-dev libjpeg-dev liblzma-dev libmagickcore-dev libmagickwand-dev libmysqlclient-dev libncurses-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libtool libxml2-dev libxslt-dev libyaml-dev make tar patch xz-utils zlibc zlib1g-dev && \
         rm -rf /var/lib/apt/lists/*
 
 
