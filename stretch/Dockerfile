@@ -39,3 +39,6 @@ RUN     mkdir -p /opt/src/opencv/release && cd /opt/src/opencv/release && \
 RUN     curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 && pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION
 RUN     pip install numpy==1.10.2
 RUN     apt-get update && apt-get install -y upx
+
+# for acl feature
+RUN     apt-get install -y acl
