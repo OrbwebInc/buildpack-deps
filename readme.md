@@ -15,6 +15,10 @@
 - 避免未來無法從官方抓取鏡像檔, 請確實執行推送到 docker hub orbweb 的動作. Orbweb 備份位置 : 
     - https://hub.docker.com/r/orbweb/buildpack-deps/
     - https://hub.docker.com/r/orbweb/orbweb-agent-buildpack-deps/
+- arm 的版本
+    - 安裝 opencv 需要花約 2 小時
+    - 安裝 numpy==1.10.2, 需要花約一小時
+    - 整體約需花五小時...故沒必要盡量別改 docker image 的 layer
 
 # how to use
 1. choose folder
