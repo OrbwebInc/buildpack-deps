@@ -13,6 +13,14 @@ RUN     apt-get install -y --no-install-recommends ca-certificates \
         libncurses-dev libpq-dev libreadline-dev libsqlite3-dev libssl-dev libtool \
         libxml2-dev libxslt-dev libyaml-dev make tar patch xz-utils zlibc zlib1g-dev
 
+# install opencv
+RUN     apt-get install -y build-essential cmake
+RUN     mkdir -p /opt/src/opencv && cd /opt/src/opencv && \
+        curl -fSL https://github.com/Itseez/opencv/archive/2.4.13.6.tar.gz | tar xvz --strip-components=1
+RUN     mkdir -p /opt/src/opencv/release && cd /opt/src/opencv/release && \
+        cmake -Wno-dev -DENABLE_PRECOMPILED_HEADERS=OFF -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS=NO -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_opencv_python=ON .. && \
+        make && make install
+
 # install python
 ENV     LANG=C.UTF-8
 ENV     PYTHON_VERSION=2.7.11
@@ -28,14 +36,6 @@ RUN     set -x && \
         make -j$(nproc) && \
         make install && \
         ldconfig
-
-# install opencv
-RUN     apt-get install -y build-essential cmake
-RUN     mkdir -p /opt/src/opencv && cd /opt/src/opencv && \
-        curl -fSL https://github.com/Itseez/opencv/archive/2.4.13.6.tar.gz | tar xvz --strip-components=1
-RUN     mkdir -p /opt/src/opencv/release && cd /opt/src/opencv/release && \
-        cmake -Wno-dev -DENABLE_PRECOMPILED_HEADERS=OFF -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS=NO -DCMAKE_INSTALL_PREFIX=/usr/local -DBUILD_opencv_python=ON .. && \
-        make && make install
 
 # install pip & dep
 RUN     curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 && pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION
