@@ -1,4 +1,4 @@
-FROM    orbweb/buildpack-deps:wheezy
+FROM    orbweb/buildpack-deps:intel-wheezy
 
 RUN     apt-get update && mkdir -p /opt/src
 RUN     apt-get install -y libc6-dev-i386 libacl1-dev

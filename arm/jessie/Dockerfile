@@ -37,15 +37,17 @@ RUN     set -x && \
         make install && \
         ldconfig
 
-# install pip & dep
+# install pip
 RUN     curl -fSL 'https://bootstrap.pypa.io/get-pip.py' | python2 && pip install --no-cache-dir --upgrade pip==$PYTHON_PIP_VERSION
-RUN     pip install numpy==1.10.2
 
 # UPX(the Ultimate Packer for eXecutables)
 RUN     apt-get install -y upx
 
 # ACL feature
 RUN     apt-get install -y acl
+
+# numpy, FOR SPEED UP host-agent compile 
+RUN     pip install numpy==1.10.2
 
 # Set TAG INTEL
 ENV     THECUS=ARM32V7
