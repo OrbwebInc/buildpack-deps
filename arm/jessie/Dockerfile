@@ -46,3 +46,6 @@ RUN     apt-get install -y upx
 
 # ACL feature
 RUN     apt-get install -y acl
+
+# Set TAG INTEL
+ENV     THECUS=ARM32V7
